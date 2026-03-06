@@ -13,7 +13,7 @@ function LiveStat({ label, value, decimals = 0 }: { label: string; value: number
       <p style={{ fontSize: "0.45rem", letterSpacing: "0.2em", color: "var(--color-accent)", textTransform: "uppercase", marginBottom: "0.25rem" }}>
         {label}
       </p>
-      <p style={{ fontSize: "1.4rem", color: "var(--color-primary)", letterSpacing: "-0.03em", lineHeight: 1, fontWeight: 700, fontFamily: "monospace" }}>
+      <p style={{ fontSize: "1.4rem", color: "var(--color-primary)", letterSpacing: "-0.03em", lineHeight: 1, fontWeight: 700, fontFamily: "'Space Mono', monospace" }}>
         {count.toFixed(decimals)}
       </p>
     </div>
@@ -38,7 +38,7 @@ function DataNote({ label, value, align = "left" }: { label: string; value: stri
         color: "var(--color-primary)",
         opacity: 0.45,
         textTransform: "uppercase",
-        fontFamily: "monospace",
+        fontFamily: "'Space Mono', monospace",
       }}>
         {value}
       </p>
@@ -47,6 +47,16 @@ function DataNote({ label, value, align = "left" }: { label: string; value: stri
 }
 
 export default function HeroPanel() {
+  const scrollToContact = () => {
+    const outer = document.querySelector(".vertical-scroll") as HTMLElement;
+    if (outer) outer.scrollTo({ top: outer.clientHeight, behavior: "smooth" });
+  };
+
+  const scrollToTech = () => {
+    const canvas = document.querySelector(".canvas-scroll") as HTMLElement;
+    if (canvas) canvas.scrollTo({ left: 0, behavior: "smooth" });
+  };
+
   const scrollToYards = () => {
     const canvas = document.querySelector(".canvas-scroll") as HTMLElement;
     if (canvas) canvas.scrollTo({ left: window.innerWidth, behavior: "smooth" });
@@ -79,7 +89,7 @@ export default function HeroPanel() {
           letterSpacing: "-0.04em",
           lineHeight: 1,
           fontWeight: 700,
-          fontFamily: "monospace",
+          fontFamily: "'Space Mono', monospace",
         }}>
           GO ONE MORE
         </div>
@@ -88,7 +98,7 @@ export default function HeroPanel() {
           color: "var(--color-primary)",
           letterSpacing: "0.3em",
           textTransform: "uppercase",
-          fontFamily: "monospace",
+          fontFamily: "'Space Mono', monospace",
           marginTop: "0.6em",
           fontWeight: 400,
         }}>
@@ -105,12 +115,12 @@ export default function HeroPanel() {
             letterSpacing: "-0.04em",
             lineHeight: 1,
             fontWeight: 700,
-            fontFamily: "monospace",
+            fontFamily: "'Space Mono', monospace",
             whiteSpace: "nowrap",
             animation: "fade-in 0.7s ease 0.3s both",
           }}
         >
-          Tade Heldt
+          tade heldt
         </h1>
         <p
           style={{
@@ -147,6 +157,93 @@ export default function HeroPanel() {
       <div style={{ position: "absolute", bottom: "2.5rem", right: "80px", animation: "fade-in 0.7s ease 1.0s both" }}>
         <DataNote label="goal" value="GO ONE MORE" align="right" />
       </div>
+
+      {/* Bottom center hint — points to contact */}
+      <button
+        onClick={scrollToContact}
+        aria-label="Go to contact"
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
+          height: "48px",
+          display: "flex",
+          alignItems: "center",
+          gap: "0.75rem",
+          background: "none",
+          border: "none",
+          borderTop: "1px solid var(--color-accent-subtle)",
+          cursor: "pointer",
+          padding: "0 1.5rem",
+          opacity: 0.6,
+          transition: "opacity 0.2s ease",
+          animation: "fade-in 0.7s ease 1.2s both",
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.6")}
+      >
+        <span style={{ fontSize: "0.48rem", letterSpacing: "0.22em", color: "var(--color-accent)", textTransform: "uppercase", fontFamily: "'Space Mono', monospace" }}>
+          contact
+        </span>
+        <span style={{ fontSize: "0.75rem", color: "var(--color-accent)", animation: "nudge-down 2.4s ease-in-out infinite", lineHeight: 1 }}>
+          ↓
+        </span>
+      </button>
+
+      {/* Left edge strip — points to tech panel */}
+      <button
+        onClick={scrollToTech}
+        aria-label="Go to tech"
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: "64px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "none",
+          padding: 0,
+          borderTop: "none",
+          borderLeft: "none",
+          borderBottom: "none",
+          borderRight: "1px solid var(--color-accent-subtle)",
+          cursor: "pointer",
+          gap: "1.2rem",
+          animation: "fade-in 0.7s ease 1.1s both",
+          opacity: 0.6,
+          transition: "opacity 0.2s ease",
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.6")}
+      >
+        <div style={{ flex: 1, width: "1px", backgroundColor: "var(--color-accent-subtle)" }} />
+
+        <span style={{
+          fontSize: "0.85rem",
+          color: "var(--color-accent)",
+          animation: "nudge-left 2.4s ease-in-out infinite",
+          lineHeight: 1,
+        }}>
+          ←
+        </span>
+
+        <span style={{
+          fontSize: "0.52rem",
+          letterSpacing: "0.22em",
+          color: "var(--color-accent)",
+          textTransform: "uppercase",
+          writingMode: "vertical-rl",
+          transform: "rotate(180deg)",
+        }}>
+          tech
+        </span>
+
+        <div style={{ flex: 1, width: "1px", backgroundColor: "var(--color-accent-subtle)" }} />
+      </button>
 
       {/* Right edge strip */}
       <button

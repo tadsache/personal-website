@@ -1,9 +1,9 @@
-@import url('https://api.fontshare.com/v2/css?f[]=berkeley-mono@400,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Berkeley Mono', monospace;
-  --font-mono: 'Berkeley Mono', monospace;
+  --font-sans: 'Space Mono', monospace;
+  --font-mono: 'Space Mono', monospace;
 }
 
 *, *::before, *::after {
@@ -25,7 +25,7 @@ html,
 body {
   height: 100%;
   overflow: hidden;
-  font-family: 'Berkeley Mono', 'Courier New', monospace;
+  font-family: 'Space Mono', 'Courier New', monospace;
   background-color: var(--color-bg);
   color: var(--color-primary);
   -webkit-font-smoothing: antialiased;
@@ -63,6 +63,25 @@ body {
 @keyframes nudge {
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(5px); }
+}
+
+@keyframes nudge-left {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-5px); }
+}
+
+@keyframes nudge-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+.vertical-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.vertical-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 @keyframes fade-in {
