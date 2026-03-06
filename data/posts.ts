@@ -7,6 +7,7 @@ export interface Post {
   week: number;
   date: string;
   runs: Run[];
+  hours: number;
   content: string;
   published: boolean;
 }
@@ -16,6 +17,7 @@ export const posts: Post[] = [
     week: 0,
     date: "2026-02-23",
     runs: [],
+    hours: 0,
     content: `A backyard ultra is not a race with a finish line.
 
 The format is simple: run a 4.167-mile loop every hour, on the hour, for as long as you can. The last person standing wins — but only after completing one more loop than everyone else. There is no set distance. No medal waiting at a predetermined point. You run until you can't, or until everyone else has stopped.
@@ -35,6 +37,7 @@ The yard is waiting.`,
       { day: "Thu", km: 12 },
       { day: "Sat", km: 18 },
     ],
+    hours: 4.5,
     content: `First week. The alarm went off at 5:30am on Saturday and I was already awake.
 
 I've been thinking about this for a while. A backyard ultra — not a marathon, not a 100k with a finish line and a medal. A last-one-standing format. You run 4.167 miles every hour until everyone else stops. The winner runs one more loop after that.
@@ -55,6 +58,7 @@ Started with a 3-hour trail run to shake out the legs. Nothing heroic. The point
       { day: "Fri", km: 8 },
       { day: "Sun", km: 22 },
     ],
+    hours: 6.5,
     content: `Second week and the body is starting to remember what this feels like.
 
 The long run on Sunday was the first time in a while where I genuinely lost track of time out there. Two hours in, legs moving on their own, just the trail and the breathing. That's the state I need to be able to hold for 12, 15, 20 hours come race day.
@@ -66,6 +70,7 @@ Still not thinking about race day. Just thinking about next Saturday.`,
     week: i + 3,
     date: "",
     runs: [],
+    hours: 0,
     content: "",
     published: false,
   })),

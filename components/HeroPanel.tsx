@@ -1,5 +1,25 @@
 "use client";
 
+import { useCountUp } from "./CountUp";
+import { posts } from "@/data/posts";
+
+const totalKm = posts.filter(p => p.published).reduce((sum, p) => sum + p.runs.reduce((s, r) => s + r.km, 0), 0);
+const totalHours = posts.filter(p => p.published).reduce((sum, p) => sum + p.hours, 0);
+
+function LiveStat({ label, value, decimals = 0 }: { label: string; value: number; decimals?: number }) {
+  const count = useCountUp(value, 1800, 1000);
+  return (
+    <div>
+      <p style={{ fontSize: "0.45rem", letterSpacing: "0.2em", color: "var(--color-accent)", textTransform: "uppercase", marginBottom: "0.25rem" }}>
+        {label}
+      </p>
+      <p style={{ fontSize: "1.4rem", color: "var(--color-primary)", letterSpacing: "-0.03em", lineHeight: 1, fontWeight: 700, fontFamily: "monospace" }}>
+        {count.toFixed(decimals)}
+      </p>
+    </div>
+  );
+}
+
 function DataNote({ label, value, align = "left" }: { label: string; value: string; align?: "left" | "right" }) {
   return (
     <div style={{ textAlign: align }}>
@@ -116,8 +136,12 @@ export default function HeroPanel() {
         <DataNote label="format" value="last one standing" align="right" />
       </div>
 
-      <div style={{ position: "absolute", bottom: "2.5rem", left: "2.5rem", animation: "fade-in 0.7s ease 0.9s both" }}>
-        <DataNote label="loop" value="6.706 km" />
+      <div
+        className="flex gap-8"
+        style={{ position: "absolute", bottom: "2.5rem", left: "2.5rem", animation: "fade-in 0.7s ease 0.9s both" }}
+      >
+        <LiveStat label="km logged" value={totalKm} />
+        <LiveStat label="hours" value={totalHours} decimals={1} />
       </div>
 
       <div style={{ position: "absolute", bottom: "2.5rem", right: "80px", animation: "fade-in 0.7s ease 1.0s both" }}>
