@@ -74,6 +74,11 @@ body {
   animation: fade-in 0.6s ease forwards;
 }
 
+@keyframes watermark-in {
+  from { opacity: 0; }
+  to { opacity: 0.06; }
+}
+
 @keyframes slide-from-bottom {
   from { opacity: 0; transform: translateY(120px); }
   to { opacity: 1; transform: translateY(0); }
