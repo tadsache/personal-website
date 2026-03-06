@@ -8,12 +8,13 @@ const MAX_BAR_HEIGHT = 80;
 const ROW_HEIGHT = 22;
 
 export default function BlogPanel() {
-  const [activeWeek, setActiveWeek] = useState(1);
+  const [activeWeek, setActiveWeek] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const scrollToWeek = useCallback((week: number) => {
-    const section = sectionRefs.current[week - 1];
+    const index = posts.findIndex((p) => p.week === week);
+    const section = sectionRefs.current[index];
     if (section && contentRef.current) {
       contentRef.current.scrollTo({
         top: section.offsetTop,
@@ -25,7 +26,7 @@ export default function BlogPanel() {
   const navigate = useCallback(
     (dir: 1 | -1) => {
       const next = activeWeek + dir;
-      if (next >= 1 && next <= 28) scrollToWeek(next);
+      if (next >= 0 && next <= 28) scrollToWeek(next);
     },
     [activeWeek, scrollToWeek]
   );
@@ -109,7 +110,8 @@ function Timeline({
 
   useEffect(() => {
     const container = containerRef.current;
-    const dot = dotRefs.current[activeWeek - 1];
+    const index = posts.findIndex((p) => p.week === activeWeek);
+    const dot = dotRefs.current[index];
     if (!container || !dot) return;
 
     const targetTop = dot.offsetTop - container.clientHeight / 3;
@@ -180,7 +182,7 @@ function Timeline({
                   transition: "color 0.2s ease",
                 }}
               >
-                W{String(post.week).padStart(2, "0")}
+                {post.week === 0 ? "intro" : `W${String(post.week).padStart(2, "0")}`}
               </span>
             </button>
           );
@@ -191,6 +193,32 @@ function Timeline({
 }
 
 function PostContent({ post }: { post: Post }) {
+  if (post.week === 0) {
+    return (
+      <div style={{ maxWidth: "620px" }}>
+        <div style={{ borderBottom: "1px solid rgba(173, 212, 229, 0.35)", paddingBottom: "2rem", marginBottom: "2.5rem" }}>
+          <p style={{ fontSize: "0.58rem", letterSpacing: "0.2em", color: "#ADD4E5", textTransform: "uppercase", marginBottom: "0.75rem" }}>
+            THE PROJECT &nbsp;·&nbsp; {post.date}
+          </p>
+          <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "#017CC3", lineHeight: 1, letterSpacing: "-0.03em", fontWeight: 700 }}>
+            Backyard Ultra
+          </h2>
+        </div>
+        <div
+          style={{
+            fontSize: "0.82rem",
+            lineHeight: "1.95",
+            color: "#017CC3",
+            opacity: 0.8,
+            whiteSpace: "pre-line",
+          }}
+        >
+          {post.content}
+        </div>
+      </div>
+    );
+  }
+
   if (!post.published) {
     return (
       <div style={{ opacity: 0.4 }}>

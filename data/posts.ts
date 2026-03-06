@@ -13,6 +13,21 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    week: 0,
+    date: "2026-02-23",
+    runs: [],
+    content: `A backyard ultra is not a race with a finish line.
+
+The format is simple: run a 4.167-mile loop every hour, on the hour, for as long as you can. The last person standing wins — but only after completing one more loop than everyone else. There is no set distance. No medal waiting at a predetermined point. You run until you can't, or until everyone else has stopped.
+
+I'm giving myself 28 weeks to get ready. Not ready to win — ready to last. Ready to keep moving through the night when the math stops making sense and the legs want to quit. Ready to find out what's on the other side of the obvious stopping points.
+
+This is a training log. One entry per week. Raw and honest. The km, the feeling, the doubt, and occasionally the good days.
+
+The yard is waiting.`,
+    published: true,
+  },
+  {
     week: 1,
     date: "2026-03-02",
     runs: [
