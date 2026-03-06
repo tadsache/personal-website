@@ -11,6 +11,16 @@ export interface Theme {
 
 export const themes: Theme[] = [
   {
+    id: "midnight",
+    name: "Midnight",
+    bg: "#111B21",
+    primary: "#E8DDD0",
+    accent: "#4A9EBF",
+    accentSubtle: "rgba(74, 158, 191, 0.25)",
+    primaryMuted: "rgba(232, 221, 208, 0.3)",
+    dotGrid: "rgba(74, 158, 191, 0.12)",
+  },
+  {
     id: "ocean",
     name: "Ocean",
     bg: "#FFE9D2",
@@ -29,16 +39,6 @@ export const themes: Theme[] = [
     accentSubtle: "rgba(105, 164, 129, 0.35)",
     primaryMuted: "rgba(44, 84, 64, 0.25)",
     dotGrid: "rgba(105, 164, 129, 0.22)",
-  },
-  {
-    id: "midnight",
-    name: "Midnight",
-    bg: "#111B21",
-    primary: "#E8DDD0",
-    accent: "#4A9EBF",
-    accentSubtle: "rgba(74, 158, 191, 0.25)",
-    primaryMuted: "rgba(232, 221, 208, 0.3)",
-    dotGrid: "rgba(74, 158, 191, 0.12)",
   },
   {
     id: "dune",

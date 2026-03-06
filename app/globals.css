@@ -13,12 +13,12 @@
 }
 
 :root {
-  --color-bg: #FFE9D2;
-  --color-primary: #017CC3;
-  --color-accent: #ADD4E5;
-  --color-accent-subtle: rgba(173, 212, 229, 0.4);
-  --color-primary-muted: rgba(1, 124, 195, 0.25);
-  --color-dot-grid: rgba(173, 212, 229, 0.55);
+  --color-bg: #111B21;
+  --color-primary: #E8DDD0;
+  --color-accent: #4A9EBF;
+  --color-accent-subtle: rgba(74, 158, 191, 0.25);
+  --color-primary-muted: rgba(232, 221, 208, 0.3);
+  --color-dot-grid: rgba(74, 158, 191, 0.12);
 }
 
 html,
