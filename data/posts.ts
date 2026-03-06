@@ -18,15 +18,21 @@ export const posts: Post[] = [
     date: "2026-02-23",
     runs: [],
     hours: 0,
-    content: `A backyard ultra is not a race with a finish line.
+    content: `Silvester 2025, 23:57. Ich sitze mit einer Freundin auf dem Sofa. Wir reden über Kim Gotwald und Co. — Läuferbubble halt.
 
-The format is simple: run a 4.167-mile loop every hour, on the hour, for as long as you can. The last person standing wins — but only after completing one more loop than everyone else. There is no set distance. No medal waiting at a predetermined point. You run until you can't, or until everyone else has stopped.
+In dem Moment denke ich: wenn ich ein Ziel für 2026 habe, dann das Laufen lernen. In den letzten zwei Jahren bin ich zweimal beim Triathlon beim Laufen eingebrochen. Immer wenn ich die Wochenkilometer erhöht habe, meldet sich das linke äußere Knie. Tractus-iliotibialis-Syndrom — oder in Fachkreisen einfach: Läuferknie.
 
-I'm giving myself 28 weeks to get ready. Not ready to win — ready to last. Ready to keep moving through the night when the math stops making sense and the legs want to quit. Ready to find out what's on the other side of the obvious stopping points.
+Das bedeutet: um überhaupt realistisch schmerzfrei zu laufen, muss erst Stabilisation her.
 
-This is a training log. One entry per week. Raw and honest. The km, the feeling, the doubt, and occasionally the good days.
+11.02.2026. Ich kriege ein Foto gesendet: "Erster Föhrer Backyard Ultra — jetzt anmelden."
 
-The yard is waiting.`,
+Ein Backyard Ultra ist ein Last Man Standing Format. Jede Stunde wird eine Loop von 6.706 km absolviert, bis nur noch eine Person eine Runde alleine läuft.
+
+Eigentlich macht es kein Sinn. Ich hab Probleme, überhaupt eine Loop zu laufen. Aber die Idee ist geboren.
+
+Das Ziel: Läufer werden. Schmerzfrei und gesund. Und dann am 10.07.2026 zu sagen — GO ONE MORE.
+
+Hier berichte ich jede Woche, wie es vorangeht.`,
     published: true,
   },
   {
