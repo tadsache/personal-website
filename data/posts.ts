@@ -56,8 +56,30 @@ Am Samstag genau dasselbe nochmal. 5 km, 7:34 min/km, ähnliche Herzfrequenz.
 Die gute Nachricht: das Knie macht mit.`,
     published: true,
   },
-  ...Array.from({ length: 19 }, (_, i) => ({
-    week: i + 2,
+  {
+    week: 2,
+    date: "2026-02-18",
+    runs: [
+      { day: "Tue", km: 5, pace: "7:40", hr: 170 },
+      { day: "Fri", km: 6.7, pace: "7:33", hr: 171 },
+    ],
+    hours: 1.5,
+    content: "",
+    published: true,
+  },
+  {
+    week: 3,
+    date: "2026-02-25",
+    runs: [
+      { day: "Tue", km: 6, pace: "8:21", hr: 163 },
+      { day: "Sun", km: 8, pace: "7:43", hr: 167 },
+    ],
+    hours: 1.9,
+    content: "",
+    published: true,
+  },
+  ...Array.from({ length: 17 }, (_, i) => ({
+    week: i + 4,
     date: "",
     runs: [],
     hours: 0,
