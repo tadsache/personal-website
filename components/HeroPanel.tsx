@@ -133,7 +133,7 @@ export default function HeroPanel() {
       </div>
 
       <div style={{ position: "absolute", top: "2.5rem", right: "80px", animation: "fade-in 0.7s ease 0.8s both" }}>
-        <DataNote label="format" value="last one standing" align="right" />
+        <DataNote label="format" value="Backyard Ultra" align="right" />
       </div>
 
       <div
@@ -145,7 +145,7 @@ export default function HeroPanel() {
       </div>
 
       <div style={{ position: "absolute", bottom: "2.5rem", right: "80px", animation: "fade-in 0.7s ease 1.0s both" }}>
-        <DataNote label="goal" value="keep running" align="right" />
+        <DataNote label="goal" value="GO ONE MORE" align="right" />
       </div>
 
       {/* Right edge strip */}
