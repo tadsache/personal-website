@@ -16,10 +16,7 @@ export default function BlogPanel() {
     const index = posts.findIndex((p) => p.week === week);
     const section = sectionRefs.current[index];
     if (section && contentRef.current) {
-      contentRef.current.scrollTo({
-        top: section.offsetTop,
-        behavior: "smooth",
-      });
+      contentRef.current.scrollTo({ top: section.offsetTop, behavior: "smooth" });
     }
   }, []);
 
@@ -31,7 +28,6 @@ export default function BlogPanel() {
     [activeWeek, scrollToWeek]
   );
 
-  // Keyboard navigation
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowDown") { e.preventDefault(); navigate(1); }
@@ -41,18 +37,16 @@ export default function BlogPanel() {
     return () => window.removeEventListener("keydown", onKey);
   }, [navigate]);
 
-  // Track active week via scroll — section becomes active when its top
-  // crosses the 1/3 mark (matching where the timeline dot sits)
   useEffect(() => {
     const container = contentRef.current;
     if (!container) return;
 
     const onScroll = () => {
       const trigger = container.scrollTop + container.clientHeight / 3;
-      let active = 1;
+      let active = 0;
       for (let i = 0; i < sectionRefs.current.length; i++) {
         const ref = sectionRefs.current[i];
-        if (ref && ref.offsetTop <= trigger) active = i + 1;
+        if (ref && ref.offsetTop <= trigger) active = posts[i].week;
         else break;
       }
       setActiveWeek(active);
@@ -64,18 +58,10 @@ export default function BlogPanel() {
 
   return (
     <section className="snap-start flex-shrink-0 w-screen h-screen flex overflow-hidden">
-      {/* Timeline */}
-      <div
-        style={{
-          width: "180px",
-          flexShrink: 0,
-          borderRight: "1px solid rgba(173, 212, 229, 0.4)",
-        }}
-      >
+      <div style={{ width: "180px", flexShrink: 0, borderRight: "1px solid var(--color-accent-subtle)" }}>
         <Timeline activeWeek={activeWeek} onSelect={scrollToWeek} />
       </div>
 
-      {/* Continuous canvas */}
       <div ref={contentRef} className="flex-1 overflow-y-auto">
         {posts.map((post, i) => (
           <div
@@ -84,7 +70,7 @@ export default function BlogPanel() {
             style={{
               minHeight: "70vh",
               padding: "4rem",
-              borderBottom: "1px solid rgba(173, 212, 229, 0.1)",
+              borderBottom: "1px solid var(--color-accent-subtle)",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
@@ -127,7 +113,7 @@ function Timeline({
       <div className="relative flex flex-col items-start">
         <div
           className="absolute top-0 bottom-0"
-          style={{ left: "4px", width: "1px", backgroundColor: "rgba(173, 212, 229, 0.4)" }}
+          style={{ left: "4px", width: "1px", backgroundColor: "var(--color-accent-subtle)" }}
         />
 
         {posts.map((post, i) => {
@@ -140,31 +126,15 @@ function Timeline({
               ref={(el) => { dotRefs.current[i] = el; }}
               onClick={() => onSelect(post.week)}
               className="flex items-center gap-3 relative"
-              style={{
-                height: `${ROW_HEIGHT}px`,
-                cursor: "pointer",
-                background: "none",
-                border: "none",
-                padding: 0,
-              }}
+              style={{ height: `${ROW_HEIGHT}px`, cursor: "pointer", background: "none", border: "none", padding: 0 }}
             >
               <div
                 style={{
                   width: isActive ? "14px" : "11px",
                   height: isActive ? "14px" : "11px",
                   borderRadius: "50%",
-                  backgroundColor: isActive
-                    ? "#017CC3"
-                    : isPublished
-                    ? "#ADD4E5"
-                    : "transparent",
-                  border: `1.5px solid ${
-                    isActive
-                      ? "#017CC3"
-                      : isPublished
-                      ? "#ADD4E5"
-                      : "rgba(173, 212, 229, 0.3)"
-                  }`,
+                  backgroundColor: isActive ? "var(--color-primary)" : isPublished ? "var(--color-accent)" : "transparent",
+                  border: `1.5px solid ${isActive ? "var(--color-primary)" : isPublished ? "var(--color-accent)" : "var(--color-accent-subtle)"}`,
                   flexShrink: 0,
                   zIndex: 1,
                   transition: "all 0.2s ease",
@@ -174,11 +144,7 @@ function Timeline({
                 style={{
                   fontSize: "0.58rem",
                   letterSpacing: "0.1em",
-                  color: isActive
-                    ? "#017CC3"
-                    : isPublished
-                    ? "#017CC3"
-                    : "rgba(1, 124, 195, 0.25)",
+                  color: isActive || isPublished ? "var(--color-primary)" : "var(--color-primary-muted)",
                   transition: "color 0.2s ease",
                 }}
               >
@@ -196,23 +162,15 @@ function PostContent({ post }: { post: Post }) {
   if (post.week === 0) {
     return (
       <div style={{ maxWidth: "620px" }}>
-        <div style={{ borderBottom: "1px solid rgba(173, 212, 229, 0.35)", paddingBottom: "2rem", marginBottom: "2.5rem" }}>
-          <p style={{ fontSize: "0.58rem", letterSpacing: "0.2em", color: "#ADD4E5", textTransform: "uppercase", marginBottom: "0.75rem" }}>
+        <div style={{ borderBottom: "1px solid var(--color-accent-subtle)", paddingBottom: "2rem", marginBottom: "2.5rem" }}>
+          <p style={{ fontSize: "0.58rem", letterSpacing: "0.2em", color: "var(--color-accent)", textTransform: "uppercase", marginBottom: "0.75rem" }}>
             THE PROJECT &nbsp;·&nbsp; {post.date}
           </p>
-          <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "#017CC3", lineHeight: 1, letterSpacing: "-0.03em", fontWeight: 700 }}>
+          <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "var(--color-primary)", lineHeight: 1, letterSpacing: "-0.03em", fontWeight: 700 }}>
             Backyard Ultra
           </h2>
         </div>
-        <div
-          style={{
-            fontSize: "0.82rem",
-            lineHeight: "1.95",
-            color: "#017CC3",
-            opacity: 0.8,
-            whiteSpace: "pre-line",
-          }}
-        >
+        <div style={{ fontSize: "0.82rem", lineHeight: "1.95", color: "var(--color-primary)", opacity: 0.8, whiteSpace: "pre-line" }}>
           {post.content}
         </div>
       </div>
@@ -221,14 +179,14 @@ function PostContent({ post }: { post: Post }) {
 
   if (!post.published) {
     return (
-      <div style={{ opacity: 0.4 }}>
-        <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "#ADD4E5", textTransform: "uppercase", marginBottom: "0.75rem" }}>
+      <div style={{ opacity: 0.35 }}>
+        <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "var(--color-accent)", textTransform: "uppercase", marginBottom: "0.75rem" }}>
           WEEK {post.week} OF 28
         </p>
-        <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "#017CC3", lineHeight: 1, letterSpacing: "-0.03em", fontWeight: 700 }}>
+        <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "var(--color-primary)", lineHeight: 1, letterSpacing: "-0.03em", fontWeight: 700 }}>
           Week {post.week}
         </h2>
-        <p style={{ fontSize: "0.8rem", color: "#017CC3", marginTop: "2rem", letterSpacing: "0.05em" }}>
+        <p style={{ fontSize: "0.8rem", color: "var(--color-primary)", marginTop: "2rem", letterSpacing: "0.05em" }}>
           still running.
         </p>
       </div>
@@ -237,27 +195,18 @@ function PostContent({ post }: { post: Post }) {
 
   return (
     <div style={{ maxWidth: "620px" }}>
-      <div style={{ borderBottom: "1px solid rgba(173, 212, 229, 0.35)", paddingBottom: "2rem", marginBottom: "2.5rem" }}>
-        <p style={{ fontSize: "0.58rem", letterSpacing: "0.2em", color: "#ADD4E5", textTransform: "uppercase", marginBottom: "0.75rem" }}>
+      <div style={{ borderBottom: "1px solid var(--color-accent-subtle)", paddingBottom: "2rem", marginBottom: "2.5rem" }}>
+        <p style={{ fontSize: "0.58rem", letterSpacing: "0.2em", color: "var(--color-accent)", textTransform: "uppercase", marginBottom: "0.75rem" }}>
           WEEK {post.week} OF 28 &nbsp;·&nbsp; {post.date}
         </p>
-        <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "#017CC3", lineHeight: 1, letterSpacing: "-0.03em", fontWeight: 700 }}>
+        <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "var(--color-primary)", lineHeight: 1, letterSpacing: "-0.03em", fontWeight: 700 }}>
           Week {post.week}
         </h2>
       </div>
 
       <WeekCalendar runs={post.runs} />
 
-      <div
-        style={{
-          fontSize: "0.82rem",
-          lineHeight: "1.95",
-          color: "#017CC3",
-          opacity: 0.8,
-          whiteSpace: "pre-line",
-          marginTop: "2.5rem",
-        }}
-      >
+      <div style={{ fontSize: "0.82rem", lineHeight: "1.95", color: "var(--color-primary)", opacity: 0.8, whiteSpace: "pre-line", marginTop: "2.5rem" }}>
         {post.content}
       </div>
     </div>
@@ -284,24 +233,17 @@ function WeekCalendar({ runs }: { runs: Run[] }) {
                   style={{
                     width: "20px",
                     height: `${barH}px`,
-                    backgroundColor: isLong ? "#017CC3" : "#ADD4E5",
-                    transition: "height 0.3s ease",
+                    backgroundColor: isLong ? "var(--color-primary)" : "var(--color-accent)",
+                    transition: "height 0.3s ease, background-color 0.3s ease",
                   }}
                 />
               </div>
               {km > 0 && (
-                <span style={{ fontSize: "0.5rem", color: "#017CC3", letterSpacing: "0.05em" }}>
+                <span style={{ fontSize: "0.5rem", color: "var(--color-primary)", letterSpacing: "0.05em" }}>
                   {km}
                 </span>
               )}
-              <span
-                style={{
-                  fontSize: "0.5rem",
-                  letterSpacing: "0.08em",
-                  color: km > 0 ? "#017CC3" : "rgba(173, 212, 229, 0.5)",
-                  textTransform: "uppercase",
-                }}
-              >
+              <span style={{ fontSize: "0.5rem", letterSpacing: "0.08em", color: km > 0 ? "var(--color-primary)" : "var(--color-accent-subtle)", textTransform: "uppercase" }}>
                 {day}
               </span>
             </div>
@@ -310,13 +252,13 @@ function WeekCalendar({ runs }: { runs: Run[] }) {
       </div>
 
       <div style={{ paddingBottom: "1.4rem" }}>
-        <p style={{ fontSize: "0.5rem", letterSpacing: "0.2em", color: "#ADD4E5", textTransform: "uppercase", marginBottom: "0.2rem" }}>
+        <p style={{ fontSize: "0.5rem", letterSpacing: "0.2em", color: "var(--color-accent)", textTransform: "uppercase", marginBottom: "0.2rem" }}>
           total
         </p>
-        <p style={{ fontSize: "2.5rem", color: "#017CC3", letterSpacing: "-0.03em", lineHeight: 1, fontWeight: 700 }}>
+        <p style={{ fontSize: "2.5rem", color: "var(--color-primary)", letterSpacing: "-0.03em", lineHeight: 1, fontWeight: 700 }}>
           {totalKm}
         </p>
-        <p style={{ fontSize: "0.55rem", letterSpacing: "0.15em", color: "#ADD4E5" }}>km</p>
+        <p style={{ fontSize: "0.55rem", letterSpacing: "0.15em", color: "var(--color-accent)" }}>km</p>
       </div>
     </div>
   );

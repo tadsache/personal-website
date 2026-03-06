@@ -12,19 +12,29 @@
   padding: 0;
 }
 
+:root {
+  --color-bg: #FFE9D2;
+  --color-primary: #017CC3;
+  --color-accent: #ADD4E5;
+  --color-accent-subtle: rgba(173, 212, 229, 0.4);
+  --color-primary-muted: rgba(1, 124, 195, 0.25);
+  --color-dot-grid: rgba(173, 212, 229, 0.55);
+}
+
 html,
 body {
   height: 100%;
   overflow: hidden;
   font-family: 'Berkeley Mono', 'Courier New', monospace;
-  background-color: #FFE9D2;
-  color: #017CC3;
+  background-color: var(--color-bg);
+  color: var(--color-primary);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
-  background-color: #017CC3;
-  color: #FFE9D2;
+  background-color: var(--color-primary);
+  color: var(--color-bg);
 }
 
 .canvas-scroll {
@@ -37,7 +47,7 @@ body {
 }
 
 .dot-grid {
-  background-image: radial-gradient(circle, rgba(173, 212, 229, 0.55) 1.5px, transparent 1.5px);
+  background-image: radial-gradient(circle, var(--color-dot-grid) 1.5px, transparent 1.5px);
   background-size: 28px 28px;
   background-attachment: fixed;
 }
