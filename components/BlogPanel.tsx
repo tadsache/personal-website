@@ -164,7 +164,7 @@ function PostContent({ post }: { post: Post }) {
       <div style={{ maxWidth: "620px" }}>
         <div style={{ borderBottom: "1px solid var(--color-accent-subtle)", paddingBottom: "2rem", marginBottom: "2.5rem" }}>
           <p style={{ fontSize: "0.58rem", letterSpacing: "0.2em", color: "var(--color-accent)", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            THE PROJECT &nbsp;·&nbsp; {post.date}
+            THE PROJECT &nbsp;&nbsp; {post.date}
           </p>
           <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "var(--color-primary)", lineHeight: 1, letterSpacing: "-0.03em", fontWeight: 700 }}>
             Backyard Ultra
@@ -197,7 +197,7 @@ function PostContent({ post }: { post: Post }) {
     <div style={{ maxWidth: "620px" }}>
       <div style={{ borderBottom: "1px solid var(--color-accent-subtle)", paddingBottom: "2rem", marginBottom: "2.5rem" }}>
         <p style={{ fontSize: "0.58rem", letterSpacing: "0.2em", color: "var(--color-accent)", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-          WEEK {post.week} OF 21 &nbsp;·&nbsp; {post.date}
+          WEEK {post.week} OF 21 &nbsp;&nbsp; {post.date}
         </p>
         <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "var(--color-primary)", lineHeight: 1, letterSpacing: "-0.03em", fontWeight: 700 }}>
           Week {post.week}
@@ -216,34 +216,52 @@ function PostContent({ post }: { post: Post }) {
 function WeekCalendar({ runs }: { runs: Run[] }) {
   const maxKm = Math.max(...runs.map((r) => r.km), 1);
   const totalKm = runs.reduce((sum, r) => sum + r.km, 0);
-  const runMap = Object.fromEntries(runs.map((r) => [r.day, r.km]));
+  const runMap = Object.fromEntries(runs.map((r) => [r.day, r]));
 
   return (
     <div className="flex items-end gap-10">
-      <div className="flex items-end gap-2">
+      <div className="flex items-end gap-4">
         {DAYS.map((day) => {
-          const km = runMap[day] ?? 0;
-          const barH = km > 0 ? Math.max(6, (km / maxKm) * MAX_BAR_HEIGHT) : 0;
+          const run = runMap[day];
+          const km = run?.km ?? 0;
+          const barH = km > 0 ? Math.max(8, (km / maxKm) * MAX_BAR_HEIGHT) : 0;
           const isLong = km === maxKm && km > 0;
 
           return (
-            <div key={day} className="flex flex-col items-center gap-1">
+            <div key={day} className="flex flex-col items-center gap-2">
+              {/* Bar */}
               <div style={{ height: `${MAX_BAR_HEIGHT}px`, display: "flex", alignItems: "flex-end" }}>
-                <div
-                  style={{
-                    width: "20px",
-                    height: `${barH}px`,
-                    backgroundColor: isLong ? "var(--color-primary)" : "var(--color-accent)",
-                    transition: "height 0.3s ease, background-color 0.3s ease",
-                  }}
-                />
+                <div style={{
+                  width: "20px",
+                  height: `${barH}px`,
+                  backgroundColor: isLong ? "var(--color-primary)" : "var(--color-accent)",
+                  transition: "height 0.3s ease",
+                }} />
               </div>
+
+              {/* km */}
               {km > 0 && (
-                <span style={{ fontSize: "0.5rem", color: "var(--color-primary)", letterSpacing: "0.05em" }}>
-                  {km}
+                <span style={{ fontSize: "0.55rem", color: "var(--color-primary)", letterSpacing: "0.04em", fontWeight: 700 }}>
+                  {km}km
                 </span>
               )}
-              <span style={{ fontSize: "0.5rem", letterSpacing: "0.08em", color: km > 0 ? "var(--color-primary)" : "var(--color-accent-subtle)", textTransform: "uppercase" }}>
+
+              {/* Pace */}
+              {run?.pace && (
+                <span style={{ fontSize: "0.5rem", color: "var(--color-accent)", letterSpacing: "0.04em" }}>
+                  {run.pace}
+                </span>
+              )}
+
+              {/* Heart rate */}
+              {run?.hr && (
+                <span style={{ fontSize: "0.5rem", color: "var(--color-accent)", letterSpacing: "0.04em" }}>
+                  ♥ {run.hr}
+                </span>
+              )}
+
+              {/* Day label */}
+              <span style={{ fontSize: "0.48rem", letterSpacing: "0.14em", color: km > 0 ? "var(--color-primary)" : "var(--color-accent-subtle)", opacity: km > 0 ? 0.45 : 1, textTransform: "uppercase" }}>
                 {day}
               </span>
             </div>
@@ -251,6 +269,7 @@ function WeekCalendar({ runs }: { runs: Run[] }) {
         })}
       </div>
 
+      {/* Total */}
       <div style={{ paddingBottom: "1.4rem" }}>
         <p style={{ fontSize: "0.5rem", letterSpacing: "0.2em", color: "var(--color-accent)", textTransform: "uppercase", marginBottom: "0.2rem" }}>
           total
