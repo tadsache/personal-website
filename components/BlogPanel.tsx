@@ -57,30 +57,85 @@ export default function BlogPanel() {
   }, []);
 
   return (
-    <section className="snap-start flex-shrink-0 w-screen h-screen flex overflow-hidden">
-      <div style={{ width: "180px", flexShrink: 0, borderRight: "1px solid var(--color-accent-subtle)" }}>
-        <Timeline activeWeek={activeWeek} onSelect={scrollToWeek} />
+    <section className="snap-start flex-shrink-0 w-screen h-screen flex flex-col overflow-hidden">
+      {/* Mobile top bar */}
+      <div className="md:hidden">
+        <MobileWeekBar activeWeek={activeWeek} navigate={navigate} />
       </div>
 
-      <div ref={contentRef} className="flex-1 overflow-y-auto">
-        {posts.map((post, i) => (
-          <div
-            key={post.week}
-            ref={(el) => { sectionRefs.current[i] = el; }}
-            style={{
-              minHeight: "70vh",
-              padding: "4rem",
-              borderBottom: "1px solid var(--color-accent-subtle)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-          >
-            <PostContent post={post} />
-          </div>
-        ))}
+      <div className="flex flex-1 overflow-hidden">
+        <div className="hidden md:block" style={{ width: "180px", flexShrink: 0, borderRight: "1px solid var(--color-accent-subtle)" }}>
+          <Timeline activeWeek={activeWeek} onSelect={scrollToWeek} />
+        </div>
+
+        <div ref={contentRef} className="flex-1 overflow-y-auto">
+          {posts.map((post, i) => (
+            <div
+              key={post.week}
+              ref={(el) => { sectionRefs.current[i] = el; }}
+              style={{
+                minHeight: "70vh",
+                padding: "clamp(1.5rem, 5vw, 4rem)",
+                borderBottom: "1px solid var(--color-accent-subtle)",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <PostContent post={post} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
+  );
+}
+
+function MobileWeekBar({
+  activeWeek,
+  navigate,
+}: {
+  activeWeek: number;
+  navigate: (dir: 1 | -1) => void;
+}) {
+  const label = activeWeek === 0 ? "intro" : `W${String(activeWeek).padStart(2, "0")}`;
+  const progress = (activeWeek / 21) * 100;
+
+  return (
+    <div style={{ borderBottom: "1px solid var(--color-accent-subtle)" }}>
+      {/* Progress bar */}
+      <div style={{ height: "2px", backgroundColor: "var(--color-accent-subtle)" }}>
+        <div
+          style={{
+            height: "100%",
+            width: `${progress}%`,
+            backgroundColor: "var(--color-accent)",
+            transition: "width 0.3s ease",
+          }}
+        />
+      </div>
+
+      {/* Nav row */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.6rem 1.5rem" }}>
+        <button
+          onClick={() => navigate(-1)}
+          style={{ background: "none", border: "none", cursor: "pointer", color: "var(--color-accent)", fontSize: "0.9rem", padding: "0.25rem 0.5rem", opacity: activeWeek === 0 ? 0.2 : 1 }}
+        >
+          ↑
+        </button>
+
+        <span style={{ fontSize: "0.58rem", letterSpacing: "0.2em", color: "var(--color-accent)", textTransform: "uppercase" }}>
+          {label} &nbsp;·&nbsp; {activeWeek} of 21
+        </span>
+
+        <button
+          onClick={() => navigate(1)}
+          style={{ background: "none", border: "none", cursor: "pointer", color: "var(--color-accent)", fontSize: "0.9rem", padding: "0.25rem 0.5rem", opacity: activeWeek === 21 ? 0.2 : 1 }}
+        >
+          ↓
+        </button>
+      </div>
+    </div>
   );
 }
 
