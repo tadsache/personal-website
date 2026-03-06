@@ -81,7 +81,7 @@ export default function HeroPanel() {
           fontWeight: 700,
           fontFamily: "monospace",
         }}>
-          6.706km
+          GO ONE MORE
         </div>
         <div style={{
           fontSize: "clamp(0.7rem, 1.6vw, 1.4rem)",
