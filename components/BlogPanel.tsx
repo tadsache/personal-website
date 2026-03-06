@@ -23,7 +23,7 @@ export default function BlogPanel() {
   const navigate = useCallback(
     (dir: 1 | -1) => {
       const next = activeWeek + dir;
-      if (next >= 0 && next <= 28) scrollToWeek(next);
+      if (next >= 0 && next <= 21) scrollToWeek(next);
     },
     [activeWeek, scrollToWeek]
   );
@@ -181,7 +181,7 @@ function PostContent({ post }: { post: Post }) {
     return (
       <div style={{ opacity: 0.35 }}>
         <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "var(--color-accent)", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-          WEEK {post.week} OF 28
+          WEEK {post.week} OF 21
         </p>
         <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "var(--color-primary)", lineHeight: 1, letterSpacing: "-0.03em", fontWeight: 700 }}>
           Week {post.week}
@@ -197,7 +197,7 @@ function PostContent({ post }: { post: Post }) {
     <div style={{ maxWidth: "620px" }}>
       <div style={{ borderBottom: "1px solid var(--color-accent-subtle)", paddingBottom: "2rem", marginBottom: "2.5rem" }}>
         <p style={{ fontSize: "0.58rem", letterSpacing: "0.2em", color: "var(--color-accent)", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-          WEEK {post.week} OF 28 &nbsp;·&nbsp; {post.date}
+          WEEK {post.week} OF 21 &nbsp;·&nbsp; {post.date}
         </p>
         <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "var(--color-primary)", lineHeight: 1, letterSpacing: "-0.03em", fontWeight: 700 }}>
           Week {post.week}

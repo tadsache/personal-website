@@ -129,7 +129,7 @@ export default function HeroPanel() {
 
       {/* Corner data notes */}
       <div style={{ position: "absolute", top: "2.5rem", left: "2.5rem", animation: "fade-in 0.7s ease 0.7s both" }}>
-        <DataNote label="training" value="28 weeks" />
+        <DataNote label="training" value="21 weeks" />
       </div>
 
       <div style={{ position: "absolute", top: "2.5rem", right: "80px", animation: "fade-in 0.7s ease 0.8s both" }}>

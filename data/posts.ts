@@ -1,6 +1,8 @@
 export interface Run {
   day: "Mon" | "Tue" | "Wed" | "Thu" | "Fri" | "Sat" | "Sun";
   km: number;
+  pace?: string;
+  hr?: number;
 }
 
 export interface Post {
@@ -15,7 +17,7 @@ export interface Post {
 export const posts: Post[] = [
   {
     week: 0,
-    date: "2026-02-23",
+    date: "2026-02-11",
     runs: [],
     hours: 0,
     content: `Silvester 2025, 23:57. Ich sitze mit einer Freundin auf dem Sofa. Wir reden über Kim Gotwald und Co. — Läuferbubble halt.
@@ -37,43 +39,25 @@ Hier berichte ich jede Woche, wie es vorangeht.`,
   },
   {
     week: 1,
-    date: "2026-03-02",
+    date: "2026-02-12",
     runs: [
-      { day: "Tue", km: 8 },
-      { day: "Thu", km: 12 },
-      { day: "Sat", km: 18 },
+      { day: "Thu", km: 5, pace: "7:32", hr: 173 },
+      { day: "Sat", km: 5, pace: "7:34", hr: 172 },
     ],
-    hours: 4.5,
-    content: `First week. The alarm went off at 5:30am on Saturday and I was already awake.
+    hours: 1.3,
+    content: `Donnerstag, 12.02. Ich schreibe die Nachricht — ich bin dabei. Erster Föhrer Backyard Ultra. Kein zurück mehr.
 
-I've been thinking about this for a while. A backyard ultra — not a marathon, not a 100k with a finish line and a medal. A last-one-standing format. You run 4.167 miles every hour until everyone else stops. The winner runs one more loop after that.
+Ich weiß, ich muss langsam starten. Die Herzfrequenz muss runter, die Beine sich wieder an die Belastung gewöhnen. ChatGPT und ich machen einen Plan. Ziel: 8 Loops. 53,6 km.
 
-There's something honest about that.
+Noch am selben Tag, erster Lauf mit dem Ziel, einen Backyard zu laufen. 5 km bei -1 Grad. Mein Herz ist noch nicht begeistert — der Plan, 7:30 min/km als entspannten Lauf anzugehen, klappt mittelmäßig. 173 bpm. Das ist niemals Zone 2.
 
-Started with a 3-hour trail run to shake out the legs. Nothing heroic. The point right now is to get the feet used to being on dirt again. Miles feel different on trails — slower, quieter, more real.
+Am Samstag genau dasselbe nochmal. 5 km, 7:34 min/km, ähnliche Herzfrequenz.
 
-28 weeks. One yard. Let's see how many loops.`,
+Die gute Nachricht: das Knie macht mit.`,
     published: true,
   },
-  {
-    week: 2,
-    date: "2026-03-09",
-    runs: [
-      { day: "Mon", km: 10 },
-      { day: "Wed", km: 14 },
-      { day: "Fri", km: 8 },
-      { day: "Sun", km: 22 },
-    ],
-    hours: 6.5,
-    content: `Second week and the body is starting to remember what this feels like.
-
-The long run on Sunday was the first time in a while where I genuinely lost track of time out there. Two hours in, legs moving on their own, just the trail and the breathing. That's the state I need to be able to hold for 12, 15, 20 hours come race day.
-
-Still not thinking about race day. Just thinking about next Saturday.`,
-    published: true,
-  },
-  ...Array.from({ length: 26 }, (_, i) => ({
-    week: i + 3,
+  ...Array.from({ length: 19 }, (_, i) => ({
+    week: i + 2,
     date: "",
     runs: [],
     hours: 0,
